@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎵 Rafi.Live (The Rafi Room)
 
-## Getting Started
+An interactive, real-time synchronized listening room dedicated to the legend, **Mohammed Rafi**. Built with Next.js 15+, Supabase Realtime, and the Web Audio API.
 
-First, run the development server:
+Live at: [rafi.anujoza.me](https://rafi.anujoza.me)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 The Concept
+Most music apps are solo experiences. **Rafi.Live** is social. Every visitor hears the exact same beat at the exact same millisecond. It uses a "Virtual DJ" logic to calculate time offsets, ensuring that whether you join from Instagram or a desktop, you are in sync with the global "Room."
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS + Shadcn/UI
+- **Database/Realtime:** Supabase (PostgreSQL + WebSockets)
+- **Audio Engine:** Web Audio API (Custom Canvas Visualizer)
+- **Hosting:** AWS Amplify
+- **Domain:** Route 53 (`anujoza.me`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚡ Key Features
+- **Global Sync:** Real-time state management ensures all users are synchronized.
+- **Dynamic Visualizer:** A custom HTML5 Canvas "Rafi Ring" that reacts to audio frequencies in real-time.
+- **Vibe Check (Coming Soon):** A community voting system to decide the next song's mood.
+- **Mobile Optimized:** Designed specifically to be accessed via "Link-in-bio" on socials like Instagram.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 How it Works (The "No BS" Version)
+The app doesn't stream raw audio from a server (which is slow and expensive). Instead:
+1. The **Supabase** "Single Source of Truth" stores the `start_time` of the current track.
+2. When a user joins, the client calculates: `(CurrentTime - StartTime)`.
+3. The `<audio>` element seeks to that exact second immediately.
+4. The **Web Audio API** creates an `AnalyserNode` to extract frequency data for the circular visualizer.
 
-## Learn More
+## 🛠 Local Setup
+1. Clone the repo: `git clone https://github.com/your-username/rafi-live.git`
+2. Install dependencies: `npm install`
+3. Set up your `.env.local`:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_publishable_key
+   ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ for the Rafi Sahab fan community.
